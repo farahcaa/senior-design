@@ -1,4 +1,4 @@
-#Project Title: AI-Powered Technical Support Assistant
+# Project Title: Calorie-Based Meal Finder
 
-#Description:
-A backend AI support system that helps users troubleshoot technical problems by analyzing their questions, images, and relevant system data. The assistant can securely query diagnostic endpoints to identify errors, provide context-aware solutions, and guide users through resolving issues step by step.
+# Description
+An app or web app that helps users find fast-food meals and grocery options that fit their personal calorie goals. Users can log in, enter a calorie target, and explore food options with clear calorie counts and serving sizes. The system helps users compare options and plan meals based on their calorie preferences.
