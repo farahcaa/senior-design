@@ -42,7 +42,7 @@ Five components are built by the team (C1–C5). Three systems are external (E1 
 
 ## 3. Component Responsibility Table
 
-| ID | Component | Responsibility (one sentence) | Interfaces in | Interfaces out | Stories | Primary owner |
+| ID | Component | Responsibility (one sentence) | Interfaces in | Interfaces out | Stories | Primary owner *(subject to change)* |
 |---|---|---|---|---|---|---|
 | C1 | Web Frontend (Next.js) | Renders the user-facing pages, calling backend APIs on the user's behalf. | I2 | I4, I5, I6, I7 | US-01 – US-05 (US-04 accessibility lives here) | Brayden Molinyawe |
 | C2 | Food Search API | Returns complete meals or grocery items that fit a submitted calorie target. | I5 | I8, I10 | US-01, US-02 | Eric Braverman |
@@ -52,6 +52,8 @@ Five components are built by the team (C1–C5). Three systems are external (E1 
 | E1 | Identity Provider (Keycloak) — *external* | Authenticates users and issues signed tokens. | I3, I4, I8, I9 | — | all (login), US-05 | Configuration: Christopher Farah |
 | E2 | USDA FoodData Central API — *external* | Supplies public grocery-item nutrition data. | I13 | — | US-02, US-03 | Integration: Eric Braverman |
 | E3 | Cloudflare Tunnel — *external* | Terminates public HTTPS at Cloudflare's edge, forwarding each hostname/path through an outbound-only tunnel to the matching container. | I1 | I2, I3 | all | Configuration: Christopher Farah |
+
+*Owners are subject to change.* All members work full stack and take features end to end (see `Team_Contract.md`). The primary owner reviews changes to their component and keeps its interfaces consistent with this document.
 
 **Traceability check:** every story maps to at least one component (US-01→C1/C2/C3, US-02→C1/C2, US-03→C1/C4, US-04→C1, US-05→C1/C3), and every built component maps to at least one story.
 
