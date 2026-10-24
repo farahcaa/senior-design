@@ -1,0 +1,21 @@
+post:
+  tags:
+    - Account
+  summary: Confirm an email change
+  description: >
+    Completes an email change with the token from the emailed confirmation
+    link. Requires the logged-in owner — the token alone is not enough.
+  operationId: confirmEmailChange
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          $ref: "../../components/schemas/Account.yaml#/components/schemas/ConfirmEmailChangeRequest"
+  responses:
+    "200":
+      description: Email updated
+    "400":
+      $ref: "../../components/responses/ErrorResponse.yaml#/components/responses/BadRequest"
+    "401":
+      $ref: "../../components/responses/ErrorResponse.yaml#/components/responses/Unauthorized"

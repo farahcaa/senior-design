@@ -1,0 +1,13 @@
+# ClusterIP for the Keycloak pods; IngressRoutes and the app initContainer use it.
+apiVersion: v1
+kind: Service
+metadata:
+  name: service
+spec:
+  selector:
+    component: keycloak
+  ports:
+    - name: http
+      protocol: TCP
+      port: 80
+      targetPort: 8080

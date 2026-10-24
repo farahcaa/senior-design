@@ -1,0 +1,26 @@
+openapi: 3.0.3
+info:
+  title: App API
+  version: 1.0.0
+
+paths:
+  /app/me:
+    $ref: ./paths/me.yaml
+
+  /app/account:
+    $ref: ./paths/account/account.yaml
+
+  /app/account/profile:
+    $ref: ./paths/account/accountProfile.yaml
+
+  /app/account/email:
+    $ref: ./paths/account/accountEmailChange.yaml
+
+  /app/account/email/confirm:
+    $ref: ./paths/account/accountEmailChangeConfirm.yaml
+
+  /app/billing/checkout/session:
+    $ref: ./paths/billing/checkoutSession.yaml
+
+  /app/billing/manage:
+    $ref: ./paths/billing/manageBilling.yaml

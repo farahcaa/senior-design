@@ -1,0 +1,44 @@
+components:
+  responses:
+    BadRequest:
+      description: Bad Request
+      content:
+        application/problem+json:
+          schema:
+            $ref: "../schemas/Error.yaml#/components/schemas/ProblemDetails"
+    Conflict:
+      description: Conflict
+      content:
+        application/problem+json:
+          schema:
+            $ref: "../schemas/Error.yaml#/components/schemas/ProblemDetails"
+    NotFound:
+      description: Not Found
+      content:
+        application/problem+json:
+          schema:
+            $ref: "../schemas/Error.yaml#/components/schemas/ProblemDetails"
+    Unauthorized:
+      description: Unauthorized
+      content:
+        application/problem+json:
+          schema:
+            $ref: "../schemas/Error.yaml#/components/schemas/ProblemDetails"
+    Forbidden:
+      description: Forbidden
+      content:
+        application/problem+json:
+          schema:
+            $ref: "../schemas/Error.yaml#/components/schemas/ProblemDetails"
+    TooManyRequests:
+      description: Too Many Requests
+      content:
+        application/problem+json:
+          schema:
+            $ref: "../schemas/Error.yaml#/components/schemas/ProblemDetails"
+    InternalServerError:
+      description: Internal Server Error
+      content:
+        application/problem+json:
+          schema:
+            $ref: "../schemas/Error.yaml#/components/schemas/ProblemDetails"

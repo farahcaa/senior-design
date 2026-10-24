@@ -1,0 +1,14 @@
+post:
+  tags:
+    - billing
+  summary: Create a Stripe billing portal session
+  operationId: manageBilling
+  responses:
+    "200":
+      description: OK
+      content:
+        application/json:
+          schema:
+            $ref: "../../components/schemas/Billing.yaml#/components/schemas/ManageBillingResponse"
+    "401":
+      $ref: "../../components/responses/ErrorResponse.yaml#/components/responses/Unauthorized"

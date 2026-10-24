@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: deployment
+spec:
+  template:
+    spec:
+      volumes:
+        - name: realm
+          configMap:
+            name: realm
+        - name: scripts
+          configMap:
+            name: scripts
+        - name: data
+          persistentVolumeClaim:
+            claimName: pvc
+      containers:
+        - name: keycloak
+          volumeMounts:
+            - name: realm
+              mountPath: /opt/keycloak/realms/
+              readOnly: true
+            - name: scripts
+              mountPath: /scripts
+              readOnly: true
+            - name: data
+              mountPath: /opt/keycloak/data

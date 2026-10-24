@@ -1,0 +1,1 @@
+{"type":"object","required":["newEmail"],"properties":{"newEmail":{"type":"string","format":"email","maxLength":320,"example":"new@example.com"}},"x-readme-ref-name":"RequestEmailChangeRequest"}

@@ -1,0 +1,61 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: deployment
+spec:
+  replicas: 1
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 0
+      maxSurge: 1
+  selector:
+    matchLabels:
+      component: app
+  template:
+    metadata:
+      labels:
+        component: app
+    spec:
+      # Give Spring's graceful shutdown (30s drain, see app.env) room to finish
+      # before the kubelet sends SIGKILL.
+      terminationGracePeriodSeconds: 45
+      initContainers:
+        # The app validates the OIDC issuer at startup; hold until Keycloak serves realms.
+        - name: wait-for-keycloak
+          image: busybox:1.37
+          command: ["sh", "-c"]
+          args:
+            - |
+              until wget -qO- http://keycloak-service/realms/master >/dev/null 2>&1; do
+                echo "waiting for keycloak"; sleep 3
+              done
+      containers:
+        - name: app
+          image: localhost/company/app:latest
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 8080
+              name: http
+          env:
+            - name: JAVA_TOOL_OPTIONS
+              value: "-XX:MaxRAMPercentage=75"
+          readinessProbe:
+            httpGet:
+              path: /actuator/health/readiness
+              port: http
+            initialDelaySeconds: 10
+            periodSeconds: 10
+          livenessProbe:
+            httpGet:
+              path: /actuator/health/liveness
+              port: http
+            initialDelaySeconds: 30
+            periodSeconds: 20
+          resources:
+            requests:
+              cpu: 250m
+              memory: 512Mi
+            limits:
+              cpu: "1"
+              memory: 1Gi

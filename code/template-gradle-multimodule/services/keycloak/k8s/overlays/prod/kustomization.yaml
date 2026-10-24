@@ -1,0 +1,103 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+namespace: default
+
+resources:
+  - ../../base
+  - ingressroute.yaml
+  - external-secrets.yaml
+
+configMapGenerator:
+  - name: scripts
+    files:
+      - start-keycloak.sh
+  - name: env
+    behavior: merge
+    envs:
+      - keycloak.env
+  - name: realm
+    files:
+      - realm.json
+
+generatorOptions:
+  disableNameSuffixHash: true
+images:
+  - name: localhost/company/keycloak
+    newName: ghcr.io/company/keycloak
+patches:
+  - patch: |-
+      apiVersion: apps/v1
+      kind: Deployment
+      metadata:
+        name: deployment
+      spec:
+        template:
+          spec:
+            imagePullSecrets:
+              - name: ghcr-pull-secret
+    target:
+      kind: Deployment
+      name: deployment
+  # Prod uses a managed Postgres instance (Supabase); host/port/database come
+  # from Vault via the db-secret-keycloak ExternalSecret. The wait-for-postgres
+  # init container only makes sense for the in-cluster instance, so drop it.
+  - patch: |-
+      apiVersion: apps/v1
+      kind: Deployment
+      metadata:
+        name: deployment
+      spec:
+        template:
+          spec:
+            initContainers:
+              - name: wait-for-postgres
+                $patch: delete
+            containers:
+              - name: keycloak
+                env:
+                  - name: KC_DB_URL_HOST
+                    value: null
+                    valueFrom:
+                      secretKeyRef:
+                        name: db-secret-keycloak
+                        key: host
+                  - name: KC_DB_URL_PORT
+                    value: null
+                    valueFrom:
+                      secretKeyRef:
+                        name: db-secret-keycloak
+                        key: port
+                  - name: KC_DB_URL_DATABASE
+                    valueFrom:
+                      configMapKeyRef: null
+                      secretKeyRef:
+                        name: db-secret-keycloak
+                        key: database
+    target:
+      kind: Deployment
+      name: deployment
+  # Drop the in-cluster Postgres that the base ships for dev/staging.
+  - patch: |-
+      apiVersion: apps/v1
+      kind: Deployment
+      metadata:
+        name: keycloak-postgres-deployment
+      $patch: delete
+  - patch: |-
+      apiVersion: v1
+      kind: Service
+      metadata:
+        name: keycloak-postgres-service
+      $patch: delete
+  - patch: |-
+      apiVersion: v1
+      kind: PersistentVolumeClaim
+      metadata:
+        name: keycloak-postgres-pv-claim
+      $patch: delete
+  - patch: |-
+      apiVersion: v1
+      kind: ConfigMap
+      metadata:
+        name: keycloak-db-env
+      $patch: delete

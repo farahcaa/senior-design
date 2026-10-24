@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+
+    <!-- The account/identity row - one per user, the root every per-user table CASCADEs from.
+         Carries auth/profile fields and the Stripe customer pointer for billing. -->
+    <changeSet id="create-users-table" author="app">
+        <createTable tableName="users">
+            <column name="id" type="UUID" defaultValueComputed="uuid_generate_v4()">
+                <constraints primaryKey="true" nullable="false" unique="true"/>
+            </column>
+
+            <column name="username" type="VARCHAR(64)">
+                <constraints nullable="false" unique="true" uniqueConstraintName="uq_users_username"/>
+            </column>
+
+            <column name="email" type="VARCHAR(320)">
+                <constraints nullable="false" unique="true" uniqueConstraintName="uq_users_email"/>
+            </column>
+
+            <column name="full_name" type="VARCHAR(255)"/>
+
+            <column name="marketing_consent" type="BOOLEAN" defaultValueBoolean="false">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="stripe_customer_id" type="VARCHAR(255)"/>
+
+            <column name="created_at" type="TIMESTAMP WITH TIME ZONE" defaultValueComputed="NOW()">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="updated_at" type="TIMESTAMP WITH TIME ZONE" defaultValueComputed="NOW()">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <addUniqueConstraint
+                tableName="users"
+                columnNames="stripe_customer_id"
+                constraintName="uq_users_stripe_customer_id"/>
+
+        <createIndex tableName="users" indexName="idx_users_stripe_customer_id">
+            <column name="stripe_customer_id"/>
+        </createIndex>
+    </changeSet>
+
+</databaseChangeLog>

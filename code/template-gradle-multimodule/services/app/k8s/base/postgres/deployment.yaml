@@ -1,0 +1,52 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: postgres-deployment
+spec:
+  replicas: 1
+  # Recreate, NEVER RollingUpdate: this postgres owns a single PVC, and a rolling restart briefly
+  # runs the old and new pods AGAINST THE SAME DATA DIRECTORY (RWO does not prevent two pods on
+  # one node). Two postgres processes on one datadir corrupts the WAL - this actually happened to
+  # the staging keycloak postgres on 2026-07-08. Recreate stops the old pod fully first.
+  strategy:
+    type: Recreate
+    # Explicit null is REQUIRED: the live object still carries rollingUpdate params from its
+    # RollingUpdate past, and kubectl apply's strategic merge keeps them unless told to delete -
+    # while the API rejects type=Recreate combined with rollingUpdate ("Forbidden: may not be
+    # specified"). null means "remove this field on merge".
+    rollingUpdate: null
+  selector:
+    matchLabels:
+      app: app
+      component: postgres
+  template:
+    metadata:
+      labels:
+        app: app
+        component: postgres
+    spec:
+      containers:
+        - name: postgres
+          image: postgres:18-trixie
+          ports:
+            - containerPort: 5432
+          env:
+            - name: POSTGRES_USER
+              valueFrom:
+                secretKeyRef:
+                  name: db-secret
+                  key: username
+            - name: POSTGRES_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: db-secret
+                  key: password
+            - name: POSTGRES_DB
+              value: app-db
+          volumeMounts:
+            - name: postgres-storage
+              mountPath: /var/lib/postgresql
+      volumes:
+        - name: postgres-storage
+          persistentVolumeClaim:
+            claimName: postgres-pv-claim

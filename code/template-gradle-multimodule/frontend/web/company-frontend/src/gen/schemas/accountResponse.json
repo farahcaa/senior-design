@@ -1,0 +1,1 @@
+{"type":"object","required":["fullName","email","tier"],"properties":{"fullName":{"type":"string","example":"Chris Doe"},"email":{"type":"string","format":"email","example":"chris@example.com"},"tier":{"type":"string","enum":["free","pro"],"example":"free"}},"x-readme-ref-name":"AccountResponse"}

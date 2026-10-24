@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+    Foundational init: just the uuid-ossp extension used for uuid_generate_v4() defaults across the
+    schema. Domain tables live in their own numbered changelogs; add new ones there.
+-->
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+
+    <!-- Postgres extension used for uuid_generate_v4() defaults across the schema. -->
+    <changeSet id="0" author="Chris Farah">
+        <sql>CREATE EXTENSION IF NOT EXISTS "uuid-ossp";</sql>
+    </changeSet>
+
+</databaseChangeLog>

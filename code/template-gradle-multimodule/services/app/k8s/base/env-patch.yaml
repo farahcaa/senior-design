@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: deployment
+spec:
+  template:
+    spec:
+      containers:
+        - name: app
+          envFrom:
+            - configMapRef:
+                name: env
+
+            # Optional secrets: dev has none of these and the features no-op without keys.
+            # Staging/prod materialize them from Vault via ExternalSecrets.
+            - secretRef:
+                name: sentry-secret
+                optional: true
+            - secretRef:
+                name: resend-secret
+                optional: true
+            - secretRef:
+                name: keycloak-admin-secret
+                optional: true
+          env:
+            - name: SPRING_DATASOURCE_URL
+              valueFrom:
+                configMapKeyRef:
+                  name: db-env
+                  key: JDBC_URL
+            - name: SPRING_DATASOURCE_USERNAME
+              valueFrom:
+                secretKeyRef:
+                  name: db-secret
+                  key: username
+            - name: SPRING_DATASOURCE_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: db-secret
+                  key: password

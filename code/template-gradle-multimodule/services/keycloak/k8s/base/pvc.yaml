@@ -1,0 +1,11 @@
+# Keycloak data dir volume (realm state lives in postgres; this holds providers cache).
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: pvc
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Gi

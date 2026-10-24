@@ -1,0 +1,55 @@
+components:
+  schemas:
+    AccountResponse:
+      type: object
+      required:
+      - fullName
+      - email
+      - tier
+      properties:
+        fullName:
+          type: string
+          example: Chris Doe
+        email:
+          type: string
+          format: email
+          example: chris@example.com
+        tier:
+          type: string
+          enum: [ free, pro ]
+          example: free
+
+    UpdateProfileRequest:
+      type: object
+      required:
+      - firstName
+      - lastName
+      properties:
+        firstName:
+          type: string
+          maxLength: 120
+          example: Chris
+        lastName:
+          type: string
+          maxLength: 120
+          example: Doe
+
+    RequestEmailChangeRequest:
+      type: object
+      required:
+      - newEmail
+      properties:
+        newEmail:
+          type: string
+          format: email
+          maxLength: 320
+          example: new@example.com
+
+    ConfirmEmailChangeRequest:
+      type: object
+      required:
+      - token
+      properties:
+        token:
+          type: string
+          example: 3f9a...

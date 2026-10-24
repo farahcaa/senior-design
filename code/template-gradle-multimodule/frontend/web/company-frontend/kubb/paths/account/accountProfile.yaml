@@ -1,0 +1,21 @@
+put:
+  tags:
+    - Account
+  summary: Update the user's name
+  description: >
+    Updates first/last name in Keycloak (the identity source) and the app's
+    denormalized full name together.
+  operationId: updateProfile
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          $ref: "../../components/schemas/Account.yaml#/components/schemas/UpdateProfileRequest"
+  responses:
+    "200":
+      description: OK
+    "400":
+      $ref: "../../components/responses/ErrorResponse.yaml#/components/responses/BadRequest"
+    "401":
+      $ref: "../../components/responses/ErrorResponse.yaml#/components/responses/Unauthorized"

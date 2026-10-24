@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: deployment
+spec:
+  replicas: 1
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 0
+      maxSurge: 1
+  selector:
+    matchLabels:
+      component: keycloak
+  template:
+    metadata:
+      labels:
+        component: keycloak
+    spec:
+      initContainers:
+        - name: wait-for-postgres
+          image: busybox:1.37
+          command: ["sh", "-c"]
+          args:
+            - |
+              until nc -z keycloak-postgres-service 5432; do
+                echo "waiting for postgres"; sleep 2
+              done
+      containers:
+        - name: keycloak
+          image: localhost/company/keycloak:latest
+          imagePullPolicy: IfNotPresent
+          command: ["/bin/bash", "/scripts/start-keycloak.sh"]
+          ports:
+            - containerPort: 8080
+              name: http
+          readinessProbe:
+            httpGet:
+              path: /realms/app
+              port: http

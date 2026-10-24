@@ -1,0 +1,8 @@
+node_modules
+dist/
+.claude/
+.wrangler/
+.env.*
+!.env.staging
+!.env.production
+.env

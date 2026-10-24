@@ -1,0 +1,13 @@
+# Public auth endpoint for staging; TLS terminates at Traefik.
+apiVersion: traefik.io/v1alpha1
+kind: IngressRoute
+metadata:
+  name: ingressroute
+spec:
+  entryPoints: [web]
+  routes:
+    - kind: Rule
+      match: Host(`auth-staging.company.com`)
+      services:
+        - name: keycloak-service
+          port: 80

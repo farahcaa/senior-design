@@ -1,0 +1,30 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+# Keycloak stack: deployment + service + data PVC, with its own postgres subtree.
+# The two patches wire volumes and secret-backed env into the deployment.
+
+namePrefix: keycloak-
+
+resources:
+  - deployment.yaml
+  - service.yaml
+  - pvc.yaml
+  - ./postgres
+
+patches:
+  - path: volume-patch.yaml
+  - path: secret-env-patch.yaml
+
+configMapGenerator:
+  - name: env
+    envs:
+      - keycloak.env
+  - name: db-env
+    envs:
+      - db.env
+
+labels:
+  - pairs:
+      app: keycloak
+    includeSelectors: true
+    includeTemplates: true

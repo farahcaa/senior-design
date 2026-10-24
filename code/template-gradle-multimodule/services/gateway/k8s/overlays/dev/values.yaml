@@ -1,0 +1,44 @@
+fullnameOverride: gateway
+
+# Minikube has no cloud load balancer, so a LoadBalancer service never gets an
+# external IP and `helm --wait` hangs on it. Access goes through
+# scripts/dev-forward.sh (port-forward), so NodePort is all dev needs.
+service:
+  type: NodePort
+
+# Dev convenience: Traefik dashboard is reachable, gated by basic auth
+# (admin/admin — local minikube only, never shipped to a real cluster).
+api:
+  dashboard: true
+
+ingressRoute:
+  dashboard:
+    enabled: true
+    entryPoints: ["websecure"]
+    matchRule: PathPrefix(`/api`) || PathPrefix(`/dashboard`)
+    middlewares:
+      - name: traefik-dashboard-auth
+
+ports:
+  web:
+    port: 80
+  websecure:
+    port: 443
+
+# The auth secret + middleware ride along with the chart render.
+extraObjects:
+  - apiVersion: v1
+    kind: Secret
+    metadata:
+      name: traefik-dashboard-auth-secret
+    type: kubernetes.io/basic-auth
+    stringData:
+      username: admin
+      password: admin
+  - apiVersion: traefik.io/v1alpha1
+    kind: Middleware
+    metadata:
+      name: traefik-dashboard-auth
+    spec:
+      basicAuth:
+        secret: traefik-dashboard-auth-secret

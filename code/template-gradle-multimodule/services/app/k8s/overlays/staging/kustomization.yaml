@@ -1,0 +1,73 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+namespace: default
+resources:
+- ../../base
+- ../../base/backup
+- ingressroute.yaml
+- external-secrets.yaml
+
+configMapGenerator:
+- behavior: merge
+  envs:
+  - app.env
+  name: env
+generatorOptions:
+  disableNameSuffixHash: true
+images:
+  - name: localhost/company/app
+    newName: ghcr.io/company/app
+patches:
+  - patch: |-
+      apiVersion: apps/v1
+      kind: Deployment
+      metadata:
+        name: deployment
+      spec:
+        template:
+          spec:
+            imagePullSecrets:
+              - name: ghcr-pull-secret
+    target:
+      kind: Deployment
+      name: deployment
+  # Staging runs a small in-cluster Postgres (prod uses managed Postgres).
+  - patch: |-
+      apiVersion: apps/v1
+      kind: Deployment
+      metadata:
+        name: app-postgres-deployment
+      spec:
+        template:
+          spec:
+            containers:
+              - name: postgres
+                resources:
+                  requests:
+                    cpu: 100m
+                    memory: 256Mi
+                  limits:
+                    cpu: 500m
+                    memory: 512Mi
+    target:
+      kind: Deployment
+      name: app-postgres-deployment
+  # Label the nightly backup dump as staging (base defaults BACKUP_ENV to a placeholder).
+  - patch: |-
+      apiVersion: batch/v1
+      kind: CronJob
+      metadata:
+        name: app-postgres-backup
+      spec:
+        jobTemplate:
+          spec:
+            template:
+              spec:
+                containers:
+                  - name: backup
+                    env:
+                      - name: BACKUP_ENV
+                        value: staging
+    target:
+      kind: CronJob
+      name: app-postgres-backup

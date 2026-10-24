@@ -1,0 +1,30 @@
+# Gradle
+.gradle/
+build/
+!gradle/wrapper/gradle-wrapper.jar
+
+# IDE
+.idea/
+*.iml
+.vscode/
+.DS_Store
+
+# Rendered manifests (CI output, never committed)
+rendered/
+
+# Node / Bun
+node_modules/
+dist/
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+
+# Local env & secrets
+*.local
+.env
+
+# Local dev secrets (create from the .example files; never commit real values)
+services/app/k8s/overlays/dev/stripe-secret.yaml
+services/app/k8s/overlays/dev/app-crypto-secret.yaml

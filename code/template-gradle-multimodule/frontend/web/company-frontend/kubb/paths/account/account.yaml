@@ -1,0 +1,14 @@
+get:
+  tags:
+    - Account
+  summary: Get account summary
+  operationId: getAccount
+  responses:
+    "200":
+      description: OK
+      content:
+        application/json:
+          schema:
+            $ref: "../../components/schemas/Account.yaml#/components/schemas/AccountResponse"
+    "401":
+      $ref: "../../components/responses/ErrorResponse.yaml#/components/responses/Unauthorized"

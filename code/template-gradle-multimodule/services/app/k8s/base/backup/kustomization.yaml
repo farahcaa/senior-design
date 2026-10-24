@@ -1,0 +1,16 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+# Standalone backup bundle. NOT included by base/kustomization.yaml on purpose: only the overlays
+# that hold real data (prod, staging) opt in by adding `../../base/backup` to their resources. Dev
+# never includes it, so dev needs no backup-secrets / healthcheck / backup VM.
+resources:
+  - backup-cronjob.yaml
+
+# The backup script rides in a ConfigMap generated from backup.sh (edit the script, not YAML).
+configMapGenerator:
+  - name: postgres-backup-script
+    files:
+      - backup.sh
+generatorOptions:
+  disableNameSuffixHash: true

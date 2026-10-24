@@ -1,0 +1,28 @@
+components:
+  schemas:
+    ProblemDetails:
+      type: object
+      required:
+      - title
+      - status
+      - detail
+      - path
+      - timestamp
+      properties:
+        title:
+          type: string
+          example: Not Found
+        status:
+          type: integer
+          format: int32
+          example: 404
+        detail:
+          type: string
+          example: The requested resource was not found.
+        path:
+          type: string
+          example: /app/language/unknown/cards
+        timestamp:
+          type: string
+          format: date-time
+          example: 2024-06-01T12:34:56Z

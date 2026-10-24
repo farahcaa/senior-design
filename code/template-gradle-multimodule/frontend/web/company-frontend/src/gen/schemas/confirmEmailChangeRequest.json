@@ -1,0 +1,1 @@
+{"type":"object","required":["token"],"properties":{"token":{"type":"string","example":"3f9a..."}},"x-readme-ref-name":"ConfirmEmailChangeRequest"}

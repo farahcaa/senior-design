@@ -1,0 +1,4 @@
+# Shared Traefik chart values. Chart: traefik/traefik 39.0.6
+# (https://traefik.github.io/charts). Per-env values files layer on top of this
+# via `helm template -f base -f overlay`.
+fullnameOverride: gateway

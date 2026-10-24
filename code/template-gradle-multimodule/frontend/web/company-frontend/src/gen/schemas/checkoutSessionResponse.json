@@ -1,0 +1,1 @@
+{"type":"object","required":["clientSecret"],"properties":{"clientSecret":{"type":"string","example":"cs_test_..."}},"x-readme-ref-name":"CheckoutSessionResponse"}

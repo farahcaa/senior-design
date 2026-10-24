@@ -1,0 +1,22 @@
+post:
+  tags:
+    - Account
+  summary: Request an email change
+  description: >
+    Starts a verify-first email change — a confirmation link is mailed to the
+    NEW address; nothing changes until it is clicked, so a typo'd address can
+    never lock the user out.
+  operationId: requestEmailChange
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          $ref: "../../components/schemas/Account.yaml#/components/schemas/RequestEmailChangeRequest"
+  responses:
+    "200":
+      description: Confirmation email sent
+    "400":
+      $ref: "../../components/responses/ErrorResponse.yaml#/components/responses/BadRequest"
+    "401":
+      $ref: "../../components/responses/ErrorResponse.yaml#/components/responses/Unauthorized"

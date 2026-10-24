@@ -1,0 +1,13 @@
+# Stable endpoint for Keycloak's database.
+apiVersion: v1
+kind: Service
+metadata:
+  name: postgres-service
+spec:
+  type: ClusterIP
+  selector:
+    app: keycloak
+    component: postgres
+  ports:
+    - port: 5432
+      targetPort: 5432

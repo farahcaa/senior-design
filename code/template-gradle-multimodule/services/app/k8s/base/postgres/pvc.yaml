@@ -1,0 +1,11 @@
+# Single-node volume; RWO is fine because the postgres Deployment uses Recreate.
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: postgres-pv-claim
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Gi

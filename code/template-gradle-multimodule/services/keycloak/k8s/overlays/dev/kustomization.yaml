@@ -1,0 +1,26 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+# Dev overlay: local realm import, placeholder secrets, HTTP-only ingress.
+resources:
+  - ../../base
+  - ingressroute.yaml
+  - secret.yaml
+
+configMapGenerator:
+  # Startup wrapper (realm import + post-boot reconcile).
+  - name: scripts
+    files:
+      - start-keycloak.sh
+  # Dev hostname/proxy settings merged over the shared base env.
+  - name: env
+    behavior: merge
+    envs:
+      - keycloak.env
+  # Realm export mounted for first-boot import.
+  - name: realm
+    files:
+      - realm.json
+
+generatorOptions:
+  disableNameSuffixHash: true

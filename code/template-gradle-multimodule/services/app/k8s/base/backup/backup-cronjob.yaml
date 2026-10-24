@@ -1,0 +1,90 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: app-postgres-backup
+  labels:
+    app: app
+spec:
+  # 03:00 UTC daily. Overlays may patch the schedule per environment.
+  schedule: "0 3 * * *"
+  # Never let two backup runs overlap (a slow dump must not stack on the next tick).
+  concurrencyPolicy: Forbid
+  # If the controller was down at 03:00, still start within an hour of the missed slot.
+  startingDeadlineSeconds: 3600
+  successfulJobsHistoryLimit: 3
+  failedJobsHistoryLimit: 3
+  jobTemplate:
+    spec:
+      backoffLimit: 2
+      # Hard ceiling so a hung dump/ssh can't run forever holding a DB connection.
+      activeDeadlineSeconds: 1800
+      template:
+        spec:
+          restartPolicy: OnFailure
+          containers:
+            - name: backup
+              # TODO: build + push this from services/app/k8s/base/backup/Dockerfile
+              # (e.g. `docker build -t ghcr.io/company/pg-backup:18 . && docker push ...`).
+              # Tag tracks the Postgres MAJOR version (Dockerfile is on postgres:18-alpine).
+              image: ghcr.io/company/pg-backup:18
+              command: ["/bin/sh", "/scripts/backup.sh"]
+              env:
+                # In-cluster Postgres - identical name/db in prod and staging (base ships it).
+                - name: PGHOST
+                  value: app-postgres-service
+                - name: PGPORT
+                  value: "5432"
+                - name: PGDATABASE
+                  value: app-db
+                # DB creds from the SAME db-secret the app uses (per-env, synced from Vault by ESO).
+                - name: DB_USERNAME
+                  valueFrom:
+                    secretKeyRef:
+                      name: db-secret
+                      key: username
+                - name: DB_PASSWORD
+                  valueFrom:
+                    secretKeyRef:
+                      name: db-secret
+                      key: password
+                # Which environment this dump belongs to (labels the filename). Overlays patch it
+                # to prod / staging; this placeholder makes an unpatched base build obvious.
+                - name: BACKUP_ENV
+                  value: unset
+                # ── Backup VM over Tailscale/LAN (shared across envs). TODO fill these in. ──
+                - name: BACKUP_SSH_HOST
+                  value: "REPLACE_ME_backup_vm_host" # TODO Tailscale IP or hostname of the backup VM
+                - name: BACKUP_SSH_USER
+                  value: "backup" # TODO ssh user on the backup VM
+                - name: BACKUP_DEST
+                  value: "/srv/backups/app" # TODO directory on the backup VM (create it first)
+                # age RECIPIENT = the PUBLIC key (encrypt-only). NOT secret. The PRIVATE key stays in
+                # your password manager for restores and is never in the cluster. TODO fill in.
+                - name: AGE_RECIPIENT
+                  value: "age1REPLACE_ME_public_recipient_key"
+                # Dead-man switch (healthchecks.io) - per-env ping URL, from Vault via backup-secrets.
+                - name: HEALTHCHECK_URL
+                  valueFrom:
+                    secretKeyRef:
+                      name: backup-secrets
+                      key: healthcheck-url
+              volumeMounts:
+                - name: script
+                  mountPath: /scripts
+                  readOnly: true
+                - name: ssh-key
+                  mountPath: /keys
+                  readOnly: true
+          volumes:
+            - name: script
+              configMap:
+                name: postgres-backup-script
+                defaultMode: 0555
+            - name: ssh-key
+              secret:
+                secretName: backup-secrets
+                items:
+                  - key: ssh-key
+                    path: ssh-key
+                # 0400: ssh refuses to use a private key with looser permissions.
+                defaultMode: 0400

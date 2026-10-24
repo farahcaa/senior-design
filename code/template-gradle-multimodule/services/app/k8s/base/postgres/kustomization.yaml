@@ -1,0 +1,17 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+# App database stack: single postgres pod behind a stable service, storage on a PVC.
+
+resources:
+  - deployment.yaml
+  - service.yaml
+  - pvc.yaml
+
+generatorOptions:
+  disableNameSuffixHash: true
+
+labels:
+  - pairs:
+      app: postgres
+    includeSelectors: true
+    includeTemplates: true

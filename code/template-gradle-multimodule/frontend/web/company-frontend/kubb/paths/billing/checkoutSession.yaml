@@ -1,0 +1,20 @@
+post:
+  tags:
+    - billing
+  summary: Create a Stripe embedded checkout session
+  operationId: createCheckoutSession
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          $ref: "../../components/schemas/Billing.yaml#/components/schemas/CheckoutSessionRequest"
+  responses:
+    "200":
+      description: OK
+      content:
+        application/json:
+          schema:
+            $ref: "../../components/schemas/Billing.yaml#/components/schemas/CheckoutSessionResponse"
+    "401":
+      $ref: "../../components/responses/ErrorResponse.yaml#/components/responses/Unauthorized"

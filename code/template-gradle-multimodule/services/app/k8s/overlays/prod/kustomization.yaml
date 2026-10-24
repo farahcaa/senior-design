@@ -1,0 +1,77 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+namespace: default
+resources:
+  - ../../base
+  - ../../base/backup
+  - ingressroute.yaml
+  - external-secrets.yaml
+
+configMapGenerator:
+  - behavior: merge
+    envs:
+      - app.env
+    name: env
+generatorOptions:
+  disableNameSuffixHash: true
+images:
+  - name: localhost/company/app
+    newName: ghcr.io/company/app
+patches:
+  - patch: |-
+      apiVersion: apps/v1
+      kind: Deployment
+      metadata:
+        name: deployment
+      spec:
+        template:
+          spec:
+            imagePullSecrets:
+              - name: ghcr-pull-secret
+    target:
+      kind: Deployment
+      name: deployment
+  # Prod runs the SAME in-cluster Postgres as staging. (Managed Supabase was considered and
+  # DROPPED 2026-07-04; the old overlay deleted the in-cluster db and pointed SPRING_DATASOURCE_URL
+  # at a Vault jdbc-url - all of that is gone.) The base already wires the datasource to
+  # app-postgres-service via db-env JDBC_URL + db-secret creds, so nothing datasource-side
+  # is patched here anymore. Give prod's Postgres a bit more headroom than staging.
+  - patch: |-
+      apiVersion: apps/v1
+      kind: Deployment
+      metadata:
+        name: app-postgres-deployment
+      spec:
+        template:
+          spec:
+            containers:
+              - name: postgres
+                resources:
+                  requests:
+                    cpu: 250m
+                    memory: 512Mi
+                  limits:
+                    cpu: "1"
+                    memory: 1Gi
+    target:
+      kind: Deployment
+      name: app-postgres-deployment
+  # Label the nightly backup dump as prod (base defaults BACKUP_ENV to a placeholder).
+  - patch: |-
+      apiVersion: batch/v1
+      kind: CronJob
+      metadata:
+        name: app-postgres-backup
+      spec:
+        jobTemplate:
+          spec:
+            template:
+              spec:
+                containers:
+                  - name: backup
+                    env:
+                      - name: BACKUP_ENV
+                        value: prod
+    target:
+      kind: CronJob
+      name: app-postgres-backup

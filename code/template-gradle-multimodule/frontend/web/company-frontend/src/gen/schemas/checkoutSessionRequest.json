@@ -1,0 +1,1 @@
+{"type":"object","required":["returnUrl"],"properties":{"returnUrl":{"type":"string","example":"https://app.example.com/account/upgrade/return?session_id={CHECKOUT_SESSION_ID}"}},"x-readme-ref-name":"CheckoutSessionRequest"}
