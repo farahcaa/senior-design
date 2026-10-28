@@ -1,6 +1,10 @@
-# MVP Backlog: Calorie-Based Meal Finder
+# MVP Backlog: Calorie and Macro Meal Finder
 
-**MVP goal:** a logged-in user can enter a calorie target and see real fast-food meals and grocery items at or below it, running on the Debian VM behind Cloudflare Tunnel.
+**Product goal:** a short calorie-based search with optional protein priority and clear macro information, followed by optional advanced preferences.
+
+**Milestones:** M1 proves the calorie-only flow; M2 adds macro data/display and protein-focused ranking; M3 adds advanced and saved preferences. Existing tasks below remain the baseline backlog, not completed-work evidence. Grocery timing, guest search, and public deployment will be agreed in the advisor meeting. See `Product_Scope_Update.md`.
+
+**M1 demo path:** S-01–S-03, F-01–F-04 establish the existing authenticated restaurant-search flow. S-04 supports development. F-05–F-08 and S-05 retain their existing scope but their milestone dates need agreement. The earlier suggested order below describes the baseline dependencies; M2 adds F-09 and F-10 once restaurant search works.
 
 The backlog has two kinds of issues:
 - **Setup (S-xx):** the groundwork every feature needs. Do these first. They are small and mostly independent, so all three of us can take one at once.
@@ -148,3 +152,28 @@ Define the first version of the schema as versioned migrations that run automati
 - [ ] On confirm, changes are saved and every affected meal total is recalculated (AC-03.1)
 
 **Cross-cutting (applies to every feature, from US-04):** each UI issue is not done until its page passes a screen-reader check. Names, result type, calories, and serving size must be announced, with no unlabeled controls.
+
+
+## Macro extension tasks
+
+### F-09: Import and display macros — M2
+**Depends on:** S-02, F-02, F-04. **Refs:** US-06, US-07.
+- [ ] Extend schema and import contracts with nullable nonnegative protein, carbohydrate, and fat grams per stated serving.
+- [ ] Preserve source and serving basis; validate supplied values and define missing values explicitly.
+- [ ] Recalculate affected meal nutrients consistently with serving quantities.
+- [ ] Show macros or “unavailable” on results and meal details; include screen-reader labels.
+
+### F-10: Optional protein ranking — M2
+**Depends on:** F-03, F-09. **Refs:** US-06, UC-03.
+- [ ] Confirm ranking rule with team; proposed total protein within the calorie limit is recorded in Product_Scope_Update.md.
+- [ ] Add an optional protein control without requiring additional onboarding questions.
+- [ ] Specify API ranking mode, deterministic ties, explanations, and missing-data behavior.
+- [ ] Verify AC-06.1–AC-06.4 and the search latency budget on a documented catalog size.
+
+### F-11: Optional advanced and saved preferences — M3
+**Depends on:** F-05, F-10. **Refs:** US-08.
+- [ ] Define minimum/maximum/desired macro target semantics, tolerances, conflict handling, and preference tags.
+- [ ] Add optional refinement controls and matching rules with concrete acceptance examples.
+- [ ] Extend saved profiles and deletion coverage for the new fields.
+
+Model-based matching and automatic calculation of personal nutritional needs are outside these initial tasks.

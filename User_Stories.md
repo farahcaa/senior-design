@@ -1,8 +1,10 @@
-# User Stories and Use Cases: Calorie-Based Meal Finder
+# User Stories and Use Cases: Calorie and Macro Meal Finder
 
 **Team members:** Eric Braverman, Brayden Molinyawe, Christopher Farah
 
-**Project:** An app or web app that lets users log in, enter a calorie target, and find fast-food meals and grocery options that fit it, with clear calorie counts and serving sizes.
+**Project:** A meal finder with a short calorie-based search and optional macro priorities. Results show serving sizes, calories, and available protein, carbohydrate, and fat values.
+
+**Scope note:** US-01–US-05 and the use cases below preserve the calorie-only baseline. US-06–US-08 extend it. See `docs/Product_Scope_Update.md` for proposed ranking rules and unresolved decisions. Existing login preconditions remain until the team decides whether to offer guest search.
 
 ---
 
@@ -164,3 +166,38 @@ Then the summary lists exactly 1 added, 1 removed, and 2 changed items before an
 Given a file in which line 7 has no serving size and line 12 has a calorie value of -20,
 When the maintainer provides it,
 Then the file is rejected, lines 7 and 12 are listed as invalid, and no item or meal total in the database changes.
+
+
+## Macro Matching Extension
+
+**US-06 (Primary — fitness-focused meal shopper, M2)**
+As someone choosing food around a calorie budget, I want to optionally prioritize protein and see the macro breakdown, so that I can compare meals against my nutrition priorities quickly.
+
+**AC-06.1 — Minimal input:** With only a valid calorie target, the existing calorie-only search works without requiring macro targets or preference questions.
+
+**AC-06.2 — Nutrition display:** Each result shows its serving size and available protein, carbohydrate, and fat in grams. Missing values are labeled unavailable, not zero.
+
+**AC-06.3 — Proposed protein ordering, pending team agreement:** Given meals A (600 kcal, 50 g protein), B (400 kcal, 40 g protein), and C (800 kcal, 60 g protein), a 700 kcal limit with protein priority returns A before B and excludes C. A calorie-only search retains its existing ordering. Equal protein values are ordered by calories ascending, then ID ascending.
+
+**AC-06.4 — Missing data:** A meal with unknown protein is excluded from protein-ranked matches. The result state explains missing data and offers an explicit switch to calorie-only results, including when no protein-ranked candidates remain.
+
+**US-07 (Secondary — nutrition maintainer, M2)**
+As the nutrition maintainer, I want imported macro values validated and meal totals recalculated, so that recommendations use consistent nutrition information.
+
+**AC-07.1:** Negative or nonnumeric supplied macro values reject the import with row-specific errors and no partial update. Missing macro values are stored as unknown.
+
+**AC-07.2:** Updating an item's protein, carbs, or fat recalculates that nutrient for affected meals using the meal's serving quantities. A missing contributing value makes that nutrient's meal total unknown. Source and serving basis are retained.
+
+**US-08 (Primary — returning user, M3)**
+As a user with more specific goals, I want to optionally refine and save macro targets and food preferences, so that future searches reflect my choices without a long quiz.
+
+Acceptance criteria for target ranges, scoring, preference tags, and saved defaults must be specified before this story is implementation-ready. Saving requires account access under the current design; account deletion must remove these saved values. US-04 accessibility applies to new controls, explanations, and macro values.
+
+### UC-03: Find Meals with an Optional Protein Priority
+**Expands:** US-06. **Preconditions:** the existing authenticated-search baseline and a sourced food catalog.
+1. User enters a valid calorie target and optionally enables protein priority.
+2. System validates inputs and filters meals within the calorie limit.
+3. System applies the selected ranking mode and returns nutrition values and a match explanation.
+4. User views meal details or changes optional controls.
+
+Invalid input uses the existing validation flow. No eligible results produces an explanatory empty state. Unknown protein follows AC-06.4. Any over-budget alternative is explicitly labeled outside the limit. Success means the user can compare eligible meals using the selected mode; no nutritional outcome is guaranteed.
