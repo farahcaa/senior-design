@@ -245,6 +245,4 @@ The checklist review below compares the new design with the supplied requirement
 
 ### Real peer-review record: pending
 
-No reviewing-team names, actual comments, session discussion, or accepted fixes were provided. Do not present the self-review rows as peer feedback. Use the separate Peer_Review_Notes.md to add one action row per real comment and include it as the final review record. Its pending status is the one evidence-dependent part of this submission package.
-
-**Review approach:** The document review focused on failure paths. In the live session, give the two-minute overview, discuss the edge cases, and record each team's real feedback and agreed fixes. Official technical references are in D1; editable figures accompany this document. Original D0 editable sources were not attached and should remain in the repository.
+**to be reviewed**
