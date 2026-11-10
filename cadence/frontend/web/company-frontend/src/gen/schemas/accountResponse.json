@@ -1,0 +1,1 @@
+{"type":"object","required":["fullName","email"],"properties":{"fullName":{"type":"string","example":"Chris Doe"},"email":{"type":"string","format":"email","example":"chris@example.com"}},"x-readme-ref-name":"AccountResponse"}

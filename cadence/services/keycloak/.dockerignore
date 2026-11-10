@@ -1,0 +1,7 @@
+# Only theme-generator/ source is needed in the build context.
+k8s
+theme-generator/node_modules
+theme-generator/dist
+theme-generator/dist_keycloak
+theme-generator/storybook-static
+theme-generator/.storybook

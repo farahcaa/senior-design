@@ -1,0 +1,221 @@
+/**
+ * This file has been claimed for ownership from @oussemasahbeni/keycloakify-login-shadcn version 250004.0.15.
+ * To relinquish ownership and restore this file to its original content, run the following command:
+ * 
+ * $ npx keycloakify own --path "login/index.css" --revert
+ */
+
+@import url(./assets/fonts/inter/inter.css) layer(base);
+@import "@fontsource-variable/plus-jakarta-sans";
+
+@import "tailwindcss";
+
+@source "../**/*.{ts,tsx}";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme {
+    --font-geist: Geist, sans-serif;
+    --font-display: "Plus Jakarta Sans Variable", "Inter var", sans-serif;
+
+    /* Cadence brand: dark purple-grey surfaces with a violet accent. */
+    --color-brand: #6d50cf;       /* filled surfaces (tiles, badges) - white text passes AA */
+    --color-brand-dark: #5a3fb8;
+    --color-brand-light: #b9a6f5; /* text/icons on dark surfaces */
+    --color-brand-soft: #2b2342;  /* tinted dark surface */
+    --color-ink: #0e0b14;
+
+    --color-background: var(--background);
+    --color-foreground: var(--foreground);
+    --color-card: var(--card);
+    --color-card-foreground: var(--card-foreground);
+    --color-popover: var(--popover);
+    --color-popover-foreground: var(--popover-foreground);
+    --color-primary: var(--primary);
+    --color-primary-foreground: var(--primary-foreground);
+    --color-secondary: var(--secondary);
+    --color-secondary-foreground: var(--secondary-foreground);
+    --color-muted: var(--muted);
+    --color-muted-foreground: var(--muted-foreground);
+    --color-accent: var(--accent);
+    --color-accent-foreground: var(--accent-foreground);
+    --color-destructive: var(--destructive);
+    --color-destructive-foreground: var(--destructive-foreground);
+    --color-border: var(--border);
+    --color-input: var(--input);
+    --color-ring: var(--ring);
+    --color-chart-1: var(--chart-1);
+    --color-chart-2: var(--chart-2);
+    --color-chart-3: var(--chart-3);
+    --color-chart-4: var(--chart-4);
+    --color-chart-5: var(--chart-5);
+}
+
+/*
+  The default border color has changed to `currentcolor` in Tailwind CSS v4,
+  so we've added these compatibility styles to make sure everything still
+  looks the same as it did with Tailwind CSS v3.
+
+  If we ever want to remove these styles, we need to add an explicit border
+  color utility to any element that depends on these defaults.
+*/
+@layer base {
+    *,
+    ::after,
+    ::before,
+    ::backdrop,
+    ::file-selector-button {
+        border-color: var(--border, currentcolor);
+    }
+}
+
+@layer utilities {
+    body.kcBodyClass {
+        @apply bg-none bg-no-repeat bg-center bg-fixed;
+        font-family: "Inter var", sans-serif;
+    }
+
+    body.oauth {
+        @apply bg-none bg-no-repeat bg-center bg-fixed;
+    }
+
+    /* Change the text to right for RTL languages*/
+    html[dir="rtl"] .children {
+        @apply text-right;
+    }
+
+    .required {
+        @apply text-red-600;
+    }
+}
+
+/* Cadence login is always dark, so light and dark share one palette. */
+:root {
+    --radius: 0.65rem;
+    --background: #16131d;
+    --foreground: #ece8f3;
+    --card: #1f1a29;
+    --card-foreground: #ece8f3;
+    --popover: #1f1a29;
+    --popover-foreground: #ece8f3;
+    --primary: #7357d6;
+    --primary-foreground: #ffffff;
+    --secondary: #2a2337;
+    --secondary-foreground: #d9cffa;
+    --muted: #262030;
+    --muted-foreground: #a49db4;
+    --accent: #2b2342;
+    --accent-foreground: #d9cffa;
+    --destructive: oklch(0.704 0.191 22.216);
+    --border: #342c42;
+    --input: #6f6489; /* field + checkbox borders: 3:1 against card/background */
+    --ring: #9a7bf0;
+    --chart-1: #9a7bf0;
+    --chart-2: #b9a6f5;
+    --chart-3: #7357d6;
+    --chart-4: #5a3fb8;
+    --chart-5: #d9cffa;
+    --sidebar: #16131d;
+    --sidebar-foreground: #ece8f3;
+    --sidebar-primary: #7357d6;
+    --sidebar-primary-foreground: #ffffff;
+    --sidebar-accent: #2b2342;
+    --sidebar-accent-foreground: #d9cffa;
+    --sidebar-border: #342c42;
+    --sidebar-ring: #9a7bf0;
+}
+
+.dark {
+    --radius: 0.65rem;
+    --background: #16131d;
+    --foreground: #ece8f3;
+    --card: #1f1a29;
+    --card-foreground: #ece8f3;
+    --popover: #1f1a29;
+    --popover-foreground: #ece8f3;
+    --primary: #7357d6;
+    --primary-foreground: #ffffff;
+    --secondary: #2a2337;
+    --secondary-foreground: #d9cffa;
+    --muted: #262030;
+    --muted-foreground: #a49db4;
+    --accent: #2b2342;
+    --accent-foreground: #d9cffa;
+    --destructive: oklch(0.704 0.191 22.216);
+    --border: #342c42;
+    --input: #6f6489; /* field + checkbox borders: 3:1 against card/background */
+    --ring: #9a7bf0;
+    --chart-1: #9a7bf0;
+    --chart-2: #b9a6f5;
+    --chart-3: #7357d6;
+    --chart-4: #5a3fb8;
+    --chart-5: #d9cffa;
+    --sidebar: #16131d;
+    --sidebar-foreground: #ece8f3;
+    --sidebar-primary: #7357d6;
+    --sidebar-primary-foreground: #ffffff;
+    --sidebar-accent: #2b2342;
+    --sidebar-accent-foreground: #d9cffa;
+    --sidebar-border: #342c42;
+    --sidebar-ring: #9a7bf0;
+}
+
+@layer utilities {
+    .card-flip-container {
+        perspective: 1000px;
+    }
+
+    .card-flip-inner {
+        position: relative;
+        transform-style: preserve-3d;
+        transition: transform 500ms ease;
+    }
+
+    .card-flip-inner.flipped {
+        transform: rotateY(180deg);
+    }
+
+    .card-face {
+        position: absolute;
+        inset: 0;
+        backface-visibility: hidden;
+    }
+
+    .card-face-back {
+        transform: rotateY(180deg);
+    }
+
+    /* Override browser autocomplete styling */
+    input:-webkit-autofill,
+    input:-webkit-autofill:hover,
+    input:-webkit-autofill:focus,
+    input:-webkit-autofill:active {
+        -webkit-box-shadow: 0 0 0 30px var(--background) inset !important;
+        -webkit-text-fill-color: var(--foreground) !important;
+        box-shadow: 0 0 0 30px var(--background) inset !important;
+    }
+
+    /* For dark mode */
+    .dark input:-webkit-autofill,
+    .dark input:-webkit-autofill:hover,
+    .dark input:-webkit-autofill:focus,
+    .dark input:-webkit-autofill:active {
+        -webkit-box-shadow: 0 0 0 30px var(--background) inset !important;
+        -webkit-text-fill-color: var(--foreground) !important;
+        box-shadow: 0 0 0 30px var(--background) inset !important;
+    }
+}
+@layer base {
+    html,
+    body,
+    #root {
+        height: 100%;
+    }
+
+    * {
+        @apply border-border;
+    }
+    body {
+        @apply bg-background text-foreground m-0 text-sm;
+    }
+}
