@@ -569,3 +569,17 @@ Tags below are references, not pinned commit hashes. Verify notices for the reso
 - [docker/setup-buildx-action@v3](https://github.com/docker/setup-buildx-action)
 - [gradle/actions/setup-gradle@v4](https://github.com/gradle/actions)
 - [oven-sh/setup-bun@v2](https://github.com/oven-sh/setup-bun)
+
+## D1 and implementation-branch additions
+
+D1 §4/§6 proposes [Apache Commons CSV](https://github.com/apache/commons-csv) and [Jackson databind](https://github.com/FasterXML/jackson-databind) (Apache-2.0; preserve license/notices) and [openid-client](https://github.com/panva/openid-client) (MIT; retain copyright/license). Versions are not pinned in D1. The main-branch lock inventory above is for the starter, not a resolved distribution inventory for the unmerged cadence branch. At 6e65ce7 its credited photos are listed below; review that branch’s changed manifests and theme-generator dependencies before shipping it.
+
+# Image credits
+
+Stock photos used on the landing page, under the [Unsplash License](https://unsplash.com/license)
+(free to use, attribution not required but given here).
+
+| File | Photo | Photographer |
+|---|---|---|
+| `burger.jpg` | [Cheeseburger with fresh vegetables](https://unsplash.com/photos/cheeseburger-with-fresh-vegetables-_qxbJUr9RqI) | Ilya Mashkov |
+| `chicken-tenders.jpg` | [Basket of fried chicken tenders, fries, and popcorn chicken](https://unsplash.com/photos/basket-of-fried-chicken-tenders-fries-and-popcorn-chicken-bG8sQGD8Bi8) | Lee Milo |
