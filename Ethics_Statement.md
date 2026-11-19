@@ -95,4 +95,4 @@ Christopher Farah — Signature: /s/ Christopher Farah    Date: November 12, 202
 
 Eric Braverman — Signature: ____________________ Date: __________
 
-Brayden Molinyawe — Signature: ____________________ Date: __________
+Brayden Molinyawe — Signature: /s/ Brayden Molinyawe Date: November 12, 2026
