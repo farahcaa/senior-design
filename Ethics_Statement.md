@@ -91,7 +91,7 @@ This draft was prepared with AI assistance. The entries below are grounded in th
 
 **Sign only after independent review.** For each signature: “I confirm that the architecture, data model, priorities and design rationale were the team's own, and that my AI-use disclosure is complete and accurate.”
 
-Christopher Farah — Signature: ____________________ Date: __________
+Christopher Farah — Signature: /s/ Christopher Farah    Date: November 12, 2026
 
 Eric Braverman — Signature: ____________________ Date: __________
 
