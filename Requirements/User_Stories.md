@@ -4,7 +4,7 @@
 
 **Project:** A meal finder with a short calorie-based search and optional macro priorities. Results show serving sizes, calories, and available protein, carbohydrate, and fat values.
 
-**Scope note:** US-01–US-05 and the use cases below preserve the calorie-only baseline. US-06–US-08 extend it. See `docs/Product_Scope_Update.md` for proposed ranking rules and unresolved decisions. Existing login preconditions remain until the team decides whether to offer guest search.
+**Scope note:** US-01–US-05 and the use cases below preserve the calorie-only baseline. US-06–US-08 extend it. See `Project-Description.md` for proposed ranking rules and unresolved decisions. Existing login preconditions remain until the team decides whether to offer guest search.
 
 ---
 

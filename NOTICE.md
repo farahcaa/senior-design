@@ -1,8 +1,14 @@
 # Attribution and license register
 
+**Purpose:** Supporting evidence for the ethics assignment, not a separate task list. It records third-party libraries, data and assets and their license obligations. The long generated inventory is collapsed below.
+
 Supplement to sections 3–4 of Ethics_Statement.md. Registry declarations are evidence of package licensing, not a grant covering unrelated images, data, or the enclosing template. This is an inventory, not a substitute for shipping licenses and copyright notices. Source tree: code/template-gradle-multimodule, introduced at 7afe150; upstream origin and permission for the assembled template are unconfirmed. The frontend manifest names yakovliam as author; this alone does not establish ownership of each asset.
 
 ## JavaScript packages
+
+<details>
+<summary>Expand the full dependency inventory (468 package/version pairs)</summary>
+
 
 All 468 unique package/version pairs from bun.lock, including optional platform binaries. Names link to version-specific package/source metadata. License identifiers compared with the [SPDX list](https://spdx.org/licenses/). Fetch each shipped package’s actual notices when packaging.
 
@@ -476,6 +482,8 @@ All 468 unique package/version pairs from bun.lock, including optional platform 
 | [yocto-queue](https://www.npmjs.com/package/yocto-queue/v/1.2.2) | 1.2.2 | Transitive | MIT | Permissive: retain applicable copyright, conditions and disclaimer |
 | [zod](https://www.npmjs.com/package/zod/v/4.3.6) | 4.3.6 | Transitive | MIT | Permissive: retain applicable copyright, conditions and disclaimer |
 | [zod-validation-error](https://www.npmjs.com/package/zod-validation-error/v/4.0.2) | 4.0.2 | Transitive | MIT | Permissive: retain applicable copyright, conditions and disclaimer |
+
+</details>
 
 ## Java artifacts and build plugins
 

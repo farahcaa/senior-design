@@ -1,8 +1,10 @@
 # MVP Backlog: Calorie and Macro Meal Finder
 
+> Reference checklist from the initial design. Use [Tasklist.md](../Tasklist.md) and the [implementation plan](../Planning/Assignment_8_Plan.md) for current proposed assignments and dates. This file is not a second schedule.
+
 **Product goal:** a short calorie-based search with optional protein priority and clear macro information, followed by optional advanced preferences.
 
-**Milestones:** M1 proves the calorie-only flow; M2 adds macro data/display and protein-focused ranking; M3 adds advanced and saved preferences. Existing tasks below remain the baseline backlog, not completed-work evidence. Grocery timing, guest search, and public deployment will be agreed in the advisor meeting. See `Product_Scope_Update.md`.
+**Milestones:** M1 proves the calorie-only flow; M2 adds macro data/display and protein-focused ranking; M3 adds advanced and saved preferences. Existing tasks below remain the baseline backlog, not completed-work evidence. Grocery timing, guest search, and public deployment will be agreed in the advisor meeting. See `Project-Description.md`.
 
 **M1 demo path:** S-01–S-03, F-01–F-04 establish the existing authenticated restaurant-search flow. S-04 supports development. F-05–F-08 and S-05 retain their existing scope but their milestone dates need agreement. The earlier suggested order below describes the baseline dependencies; M2 adds F-09 and F-10 once restaurant search works.
 
@@ -10,7 +12,7 @@ The backlog has two kinds of issues:
 - **Setup (S-xx):** the groundwork every feature needs. Do these first. They are small and mostly independent, so all three of us can take one at once.
 - **Features (F-xx):** user-facing slices written as user stories. Whoever takes one builds it end to end: database, API, and UI.
 
-Sizes: **S** ≈ one sitting, **M** ≈ a few days, **L** ≈ a week. Story and design references (US-xx, AC-xx, I#, C#) point to `User_Stories.md` and `Design_Diagrams/D0_High_Level_Design.md`.
+Sizes: **S** ≈ one sitting, **M** ≈ a few days, **L** ≈ a week. Story and design references (US-xx, AC-xx, I#, C#) point to `Requirements/User_Stories.md` and `Design_Diagrams/D0_High_Level_Design.md`.
 
 ## Suggested Order
 
@@ -165,7 +167,7 @@ Define the first version of the schema as versioned migrations that run automati
 
 ### F-10: Optional protein ranking — M2
 **Depends on:** F-03, F-09. **Refs:** US-06, UC-03.
-- [ ] Confirm ranking rule with team; proposed total protein within the calorie limit is recorded in Product_Scope_Update.md.
+- [ ] Confirm ranking rule with team; proposed total protein within the calorie limit is recorded in Project-Description.md.
 - [ ] Add an optional protein control without requiring additional onboarding questions.
 - [ ] Specify API ranking mode, deterministic ties, explanations, and missing-data behavior.
 - [ ] Verify AC-06.1–AC-06.4 and the search latency budget on a documented catalog size.

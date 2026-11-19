@@ -16,12 +16,12 @@ Each person please draft their three slides with one visual where useful and sho
 | Slide | Title / content cues | Visual | Owner / speaker | Seconds | Start | Sources |
 |---|---|---|---|---:|---|---|
 | 1 | Calorie and Macro Meal Finder: purpose is quick meal comparison; first goal is meals within a calorie budget with clear servings | Simple target → meals sketch | Christopher Farah | 45 | 0:00 | Project-Description.md; D0 §1 |
-| 2 | Team and advisor: all names, actual contact details and advisor; responsibilities are provisional | Three names/roles, advisor line | Brayden Molinyawe | 40 | 0:45 | Team_Contract.md; confirm contacts/advisor |
+| 2 | Team and advisor: all names, actual contact details and advisor; responsibilities are provisional | Three names/roles, advisor line | Brayden Molinyawe | 40 | 0:45 | Team/Team_Contract.md; confirm contacts/advisor |
 | 3 | Project abstract: problem, user, calorie baseline, staged macro expansion, validation | Approximately 100-word abstract with highlighted key terms | Eric Braverman | 45 | 1:25 | Project-Description.md; D1 §1 |
-| 4 | Stories and system design: enter 700 → 680 and 450; frontend → search/profile/import → database; identity and data sources | Redrawn, labeled D0 with short US-01/AC-01.1 callout | Eric Braverman | 85 | 2:10 | User_Stories.md; D0; D1 §2–5; D2 §2 |
-| 5 | Constraints and trade-offs: free data coverage; serving accuracy; private goals; accessibility | Constraint → design response table | Eric Braverman | 50 | 3:35 | Constraints_Essay.md; US-04/05; D1/D2 |
-| 6 | Progress: dated documents, template, Cadence branch; explicitly label designed versus implemented | Evidence timeline with commit IDs | Christopher Farah | 85 | 4:25 | Git history; D1/D2; Planning/Implementation_Plan.md |
-| 7 | Expected term-end results: agreed design, repeatable setup and tested calorie-search slice as a proposed target | Completed / next / later milestones | Brayden Molinyawe | 65 | 5:50 | Planning/Implementation_Plan.md; confirm official term deadlines |
+| 4 | Stories and system design: enter 700 → 680 and 450; frontend → search/profile/import → database; identity and data sources | Redrawn, labeled D0 with short US-01/AC-01.1 callout | Eric Braverman | 85 | 2:10 | Requirements/User_Stories.md; D0; D1 §2–5; D2 §2 |
+| 5 | Constraints and trade-offs: free data coverage; serving accuracy; private goals; accessibility | Constraint → design response table | Eric Braverman | 50 | 3:35 | Ethics/Constraints_Essay.md; US-04/05; D1/D2 |
+| 6 | Progress: dated documents, template, Cadence branch; explicitly label designed versus implemented | Evidence timeline with commit IDs | Christopher Farah | 85 | 4:25 | Git history; D1/D2; Planning/Assignment_8_Plan.md |
+| 7 | Expected term-end results: agreed design, repeatable setup and tested calorie-search slice as a proposed target | Completed / next / later milestones | Brayden Molinyawe | 65 | 5:50 | Planning/Assignment_8_Plan.md; confirm official term deadlines |
 | 8 | Division of work: Chris database/profile/setup, Eric search/import, Brayden UI; cross-review | Three workstreams with immediate handoffs | Christopher Farah | 50 | 6:55 | D0 owner table; Tasklist.md; Planning effort matrix |
 | 9 | Expected Expo demo: search, inspect meal, save target, demonstrate an error; optional macro extension if implemented and validated | Numbered demo storyboard plus fallback | Brayden Molinyawe | 75 | 7:45 | US-01/03/05; D1/D2; product milestone plan |
 

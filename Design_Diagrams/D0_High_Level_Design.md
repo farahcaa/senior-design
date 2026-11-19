@@ -53,7 +53,7 @@ Five components are built by the team (C1–C5). Three systems are external (E1 
 | E2 | USDA FoodData Central API — *external* | Supplies public grocery-item nutrition data. | I13 | — | US-02, US-03 | Integration: Eric Braverman |
 | E3 | Cloudflare Tunnel — *external* | Terminates public HTTPS at Cloudflare's edge, forwarding each hostname/path through an outbound-only tunnel to the matching container. | I1 | I2, I3 | all | Configuration: Christopher Farah |
 
-*Owners are subject to change.* All members work full stack and take features end to end (see `Team_Contract.md`). The primary owner reviews changes to their component and keeps its interfaces consistent with this document.
+*Owners are subject to change.* All members work full stack and take features end to end (see `Team/Team_Contract.md`). The primary owner reviews changes to their component and keeps its interfaces consistent with this document.
 
 **Traceability check:** every story maps to at least one component (US-01→C1/C2/C3, US-02→C1/C2, US-03→C1/C4, US-04→C1, US-05→C1/C3), and every built component maps to at least one story.
 

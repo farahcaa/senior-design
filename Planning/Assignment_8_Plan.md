@@ -1,43 +1,37 @@
-# Assignment 8 — implementation plan
-## 1. Task List
+# Assignment 8 — Implementation Plan
 
-Assignment 8 · Task Lists (#5) and Milestones, Timeline, and Effort Matrix (#6). Planning baseline: November 12, 2026. Eric Braverman, Brayden Molinyawe, Christopher Farah.
+**Calorie and Macro Meal Finder**  
+Task Lists (#5) and Milestones, Timeline, and Effort Matrix (#6)  
+Planning baseline · November 12, 2026  
+Eric Braverman, Brayden Molinyawe, Christopher Farah
 
-Calorie and Macro Meal Finder. The first release follows the authenticated calorie-only D1/D2 baseline. Macro sorting and guest search require a separate scope decision. Cadence is a starter implementation; D0 names are retained below. Confirm the frontend stack before porting work.
+The first release follows the authenticated calorie-only D1/D2 baseline. Macro sorting and guest search require a separate scope decision. Cadence is a starter implementation; D0 names are retained below. Confirm the frontend stack before porting work.
+
+## 1. Task list
 
 Proposed assignments follow D0 component leads: five tasks per person. They are invitations to own future work, not claims about past effort.
 
-T01. Validate the Database (PostgreSQL) and backend startup from a clean Cadence checkout. Owner: Christopher Farah.
+| Task | Statement | Proposed owner |
+| --- | --- | --- |
+| T01 | Validate the Database (PostgreSQL) and backend startup from a clean Cadence checkout. | Christopher Farah |
+| T02 | Obtain a sourced restaurant fixture for the Nutrition Data Importer with calories and serving sizes. | Eric Braverman |
+| T03 | Develop the Web Frontend (Next.js design) search form against a mocked I5 response. | Brayden Molinyawe |
+| T04 | Develop Database (PostgreSQL) migrations for restaurant, food item, meal and meal composition. | Christopher Farah |
+| T05 | Develop the Nutrition Data Importer seed path with row validation and atomic writes. | Eric Braverman |
+| T06 | Develop the Web Frontend result list and meal details with keyboard and screen-reader support. | Brayden Molinyawe |
+| T07 | Develop the Food Search API calorie filter, deterministic ranking and closest-option response. | Eric Braverman |
+| T08 | Develop the User Profile API saved-target read and update flow with Keycloak subject checks. | Christopher Farah |
+| T09 | Test the Web Frontend against the Food Search API using the 700-calorie acceptance example. | Brayden Molinyawe |
+| T10 | Develop the Nutrition Data Importer preview, confirmation and stale-preview rejection. | Eric Braverman |
+| T11 | Develop the User Profile API deletion job, identity cleanup and retry recovery. | Christopher Farah |
+| T12 | Develop the Web Frontend save-target, deletion-confirmation and recovery messages. | Brayden Molinyawe |
+| T13 | Validate the Nutrition Data Importer USDA grocery mapping against known serving units and missing data. | Eric Braverman |
+| T14 | Validate Database (PostgreSQL) backup restoration and deletion replay on an isolated deployment. | Christopher Farah |
+| T15 | Validate the Web Frontend end-to-end demonstration, accessible status messages and two-second search budget. | Brayden Molinyawe |
 
-T02. Obtain a sourced restaurant fixture for the Nutrition Data Importer with calories and serving sizes. Owner: Eric Braverman.
+## 2. Milestones
 
-T03. Develop the Web Frontend (Next.js design) search form against a mocked I5 response. Owner: Brayden Molinyawe.
-
-T04. Develop Database (PostgreSQL) migrations for restaurant, food item, meal and meal composition. Owner: Christopher Farah.
-
-T05. Develop the Nutrition Data Importer seed path with row validation and atomic writes. Owner: Eric Braverman.
-
-T06. Develop the Web Frontend result list and meal details with keyboard and screen-reader support. Owner: Brayden Molinyawe.
-
-T07. Develop the Food Search API calorie filter, deterministic ranking and closest-option response. Owner: Eric Braverman.
-
-T08. Develop the User Profile API saved-target read and update flow with Keycloak subject checks. Owner: Christopher Farah.
-
-T09. Test the Web Frontend against the Food Search API using the 700-calorie acceptance example. Owner: Brayden Molinyawe.
-
-T10. Develop the Nutrition Data Importer preview, confirmation and stale-preview rejection. Owner: Eric Braverman.
-
-T11. Develop the User Profile API deletion job, identity cleanup and retry recovery. Owner: Christopher Farah.
-
-T12. Develop the Web Frontend save-target, deletion-confirmation and recovery messages. Owner: Brayden Molinyawe.
-
-T13. Validate the Nutrition Data Importer USDA grocery mapping against known serving units and missing data. Owner: Eric Braverman.
-
-T14. Validate Database (PostgreSQL) backup restoration and deletion replay on an isolated deployment. Owner: Christopher Farah.
-
-T15. Validate the Web Frontend end-to-end demonstration, accessible status messages and two-second search budget. Owner: Brayden Molinyawe.
-
-## 2. Milestones List | completed evidence
+### Completed work and commit history
 
 Dates below are Git author dates. “Recorded” means the named artifact was committed; it does not certify course submission, passing tests, or equal authorship. Verify with git show and the indicated commit.
 
@@ -62,7 +56,7 @@ Brayden Molinyawe — add your own completed contributions, dates and evidence: 
 
 Course checkpoints: Assignment 8 was due Oct 28; the ethics statement was due Nov 11. Submission status is unverified for both. D2 peer feedback still requires a real review record. No Week 1 course calendar was located; add its other graded dates and replace the Week 14 target with the official date before submission.
 
-## 2. Milestones List | planned demonstrations
+### Planned demonstrations
 
 These dates are scheduling proposals, not past commitments. Verifiers listed are proposed reviewers. The winter/exam blackout separates fall planning from implementation semester checkpoints.
 
@@ -79,7 +73,9 @@ These dates are scheduling proposals, not past commitments. Verifiers listed are
 | M9 / 2027-04-16 | Integrated release candidate | Run accessibility, latency and failure checks; record results and limitations. | Whole team |
 | M10 / 2027-04-30 | Implementation semester handoff (target) | Repeat accepted demo from documented checkout; review evidence and open issues. | Team + advisor invited |
 
-## 3. Table 1 | task timeline
+## 3. Table 1 — Timeline
+
+### Tasks
 
 Each task has five scheduled working days plus one task-buffer day (20% of working duration). The last date is that buffer day, not extra estimated labor. Dates exclude weekends and the draft blackouts. Dependencies are finish-to-start. C / E / B = Christopher / Eric / Brayden.
 
@@ -103,7 +99,7 @@ Each task has five scheduled working days plus one task-buffer day (20% of worki
 
 Calendar driver into the final demonstration: T01/T02 → T04 → T08 → T11 → T14 → T15 → M9. T13 also gates T15; holiday and owner availability can consume the gaps. Confirm this chain after owners supply estimates.
 
-## 3. Table 1 | milestone dates and protected time
+### Milestone dates and protected review time
 
 | ID | Milestone | Recorded / planned date | Protected review block |
 | --- | --- | --- | --- |
@@ -130,72 +126,66 @@ Calendar driver into the final demonstration: T01/T02 → T04 → T08 → T11 �
 
 Protected dates are reserved for milestone verification or recovery, not new feature commitments. Proposed blackouts: Nov 25–29; Dec 12–Jan 10 for exams/winter break; Mar 8–14 pending spring availability. Confirm co-op/exam schedules at kickoff; keep semester-end exam time outside the Apr 30 handoff.
 
-## 4. Table 2 | effort matrix
+## 4. Table 2 — Effort matrix
 
-Proposed allocation of each task’s effort (%), not hours worked or owner estimates. Asterisk marks its sole primary owner. Equal-sized tasks give a balanced initial allocation; use weighted hours once estimates arrive.
+Proposed allocation of each task’s effort (%), not hours worked or owner estimates. Bold marks the primary owner for each task. Equal-sized tasks give a balanced initial allocation; use weighted hours once estimates arrive.
 
 | ID | Task statement | Chris % | Eric % | Brayden % | Total % |
 | --- | --- | --- | --- | --- | --- |
-| T01 | Validate the Database (PostgreSQL) and backend startup from a clean Cadence checkout. | 60* | 20 | 20 | 100 |
-| T02 | Obtain a sourced restaurant fixture for the Nutrition Data Importer with calories and serving sizes. | 20 | 60* | 20 | 100 |
-| T03 | Develop the Web Frontend (Next.js design) search form against a mocked I5 response. | 20 | 20 | 60* | 100 |
-| T04 | Develop Database (PostgreSQL) migrations for restaurant, food item, meal and meal composition. | 60* | 20 | 20 | 100 |
-| T05 | Develop the Nutrition Data Importer seed path with row validation and atomic writes. | 20 | 60* | 20 | 100 |
-| T06 | Develop the Web Frontend result list and meal details with keyboard and screen-reader support. | 20 | 20 | 60* | 100 |
-| T07 | Develop the Food Search API calorie filter, deterministic ranking and closest-option response. | 20 | 60* | 20 | 100 |
-| T08 | Develop the User Profile API saved-target read and update flow with Keycloak subject checks. | 60* | 20 | 20 | 100 |
-| T09 | Test the Web Frontend against the Food Search API using the 700-calorie acceptance example. | 20 | 20 | 60* | 100 |
-| T10 | Develop the Nutrition Data Importer preview, confirmation and stale-preview rejection. | 20 | 60* | 20 | 100 |
-| T11 | Develop the User Profile API deletion job, identity cleanup and retry recovery. | 60* | 20 | 20 | 100 |
-| T12 | Develop the Web Frontend save-target, deletion-confirmation and recovery messages. | 20 | 20 | 60* | 100 |
-| T13 | Validate the Nutrition Data Importer USDA grocery mapping against known serving units and missing data. | 20 | 60* | 20 | 100 |
-| T14 | Validate Database (PostgreSQL) backup restoration and deletion replay on an isolated deployment. | 60* | 20 | 20 | 100 |
-| T15 | Validate the Web Frontend end-to-end demonstration, accessible status messages and two-second search budget. | 20 | 20 | 60* | 100 |
+| T01 | Validate the Database (PostgreSQL) and backend startup from a clean Cadence checkout. | **60** | 20 | 20 | 100 |
+| T02 | Obtain a sourced restaurant fixture for the Nutrition Data Importer with calories and serving sizes. | 20 | **60** | 20 | 100 |
+| T03 | Develop the Web Frontend (Next.js design) search form against a mocked I5 response. | 20 | 20 | **60** | 100 |
+| T04 | Develop Database (PostgreSQL) migrations for restaurant, food item, meal and meal composition. | **60** | 20 | 20 | 100 |
+| T05 | Develop the Nutrition Data Importer seed path with row validation and atomic writes. | 20 | **60** | 20 | 100 |
+| T06 | Develop the Web Frontend result list and meal details with keyboard and screen-reader support. | 20 | 20 | **60** | 100 |
+| T07 | Develop the Food Search API calorie filter, deterministic ranking and closest-option response. | 20 | **60** | 20 | 100 |
+| T08 | Develop the User Profile API saved-target read and update flow with Keycloak subject checks. | **60** | 20 | 20 | 100 |
+| T09 | Test the Web Frontend against the Food Search API using the 700-calorie acceptance example. | 20 | 20 | **60** | 100 |
+| T10 | Develop the Nutrition Data Importer preview, confirmation and stale-preview rejection. | 20 | **60** | 20 | 100 |
+| T11 | Develop the User Profile API deletion job, identity cleanup and retry recovery. | **60** | 20 | 20 | 100 |
+| T12 | Develop the Web Frontend save-target, deletion-confirmation and recovery messages. | 20 | 20 | **60** | 100 |
+| T13 | Validate the Nutrition Data Importer USDA grocery mapping against known serving units and missing data. | 20 | **60** | 20 | 100 |
+| T14 | Validate Database (PostgreSQL) backup restoration and deletion replay on an isolated deployment. | **60** | 20 | 20 | 100 |
+| T15 | Validate the Web Frontend end-to-end demonstration, accessible status messages and two-second search budget. | 20 | 20 | **60** | 100 |
 | Total | Sum across 15 tasks | 500 | 500 | 500 | 1500 |
 
 Each column totals 500 percentage points (one third of equal-weight capacity). Each owner should supply optimistic, most likely and pessimistic hours. Compute expected task hours = (O + 4M + P) / 6 and multiply by each share. If actual weekly demand exceeds declared capacity, move review/testing hours to the available teammate or resequence before consuming protected time.
 
 ## 5. Work breakdown structure
 
-FOUNDATION
+### Foundation
 
-T01 · Validate the Database (PostgreSQL) and backend startup from a clean Cadence checkout. Christopher Farah.
+- **T01** · Validate the Database (PostgreSQL) and backend startup from a clean Cadence checkout. Christopher Farah.
+- **T02** · Obtain a sourced restaurant fixture for the Nutrition Data Importer with calories and serving sizes. Eric Braverman.
 
-T02 · Obtain a sourced restaurant fixture for the Nutrition Data Importer with calories and serving sizes. Eric Braverman.
+- **T03** · Develop the Web Frontend (Next.js design) search form against a mocked I5 response. Brayden Molinyawe.
 
-T03 · Develop the Web Frontend (Next.js design) search form against a mocked I5 response. Brayden Molinyawe.
+### First search
 
-FIRST SEARCH
+- **T04** · Develop Database (PostgreSQL) migrations for restaurant, food item, meal and meal composition. Christopher Farah.
+- **T05** · Develop the Nutrition Data Importer seed path with row validation and atomic writes. Eric Braverman.
 
-T04 · Develop Database (PostgreSQL) migrations for restaurant, food item, meal and meal composition. Christopher Farah.
+- **T06** · Develop the Web Frontend result list and meal details with keyboard and screen-reader support. Brayden Molinyawe.
+- **T07** · Develop the Food Search API calorie filter, deterministic ranking and closest-option response. Eric Braverman.
 
-T05 · Develop the Nutrition Data Importer seed path with row validation and atomic writes. Eric Braverman.
+- **T09** · Test the Web Frontend against the Food Search API using the 700-calorie acceptance example. Brayden Molinyawe.
 
-T06 · Develop the Web Frontend result list and meal details with keyboard and screen-reader support. Brayden Molinyawe.
+### Accounts
 
-T07 · Develop the Food Search API calorie filter, deterministic ranking and closest-option response. Eric Braverman.
+- **T08** · Develop the User Profile API saved-target read and update flow with Keycloak subject checks. Christopher Farah.
+- **T11** · Develop the User Profile API deletion job, identity cleanup and retry recovery. Christopher Farah.
 
-T09 · Test the Web Frontend against the Food Search API using the 700-calorie acceptance example. Brayden Molinyawe.
+- **T12** · Develop the Web Frontend save-target, deletion-confirmation and recovery messages. Brayden Molinyawe.
 
-ACCOUNTS
+### Catalog integrity
 
-T08 · Develop the User Profile API saved-target read and update flow with Keycloak subject checks. Christopher Farah.
+- **T10** · Develop the Nutrition Data Importer preview, confirmation and stale-preview rejection. Eric Braverman.
+- **T13** · Validate the Nutrition Data Importer USDA grocery mapping against known serving units and missing data. Eric Braverman.
 
-T11 · Develop the User Profile API deletion job, identity cleanup and retry recovery. Christopher Farah.
+### Release
 
-T12 · Develop the Web Frontend save-target, deletion-confirmation and recovery messages. Brayden Molinyawe.
-
-CATALOG INTEGRITY
-
-T10 · Develop the Nutrition Data Importer preview, confirmation and stale-preview rejection. Eric Braverman.
-
-T13 · Validate the Nutrition Data Importer USDA grocery mapping against known serving units and missing data. Eric Braverman.
-
-RELEASE
-
-T14 · Validate Database (PostgreSQL) backup restoration and deletion replay on an isolated deployment. Christopher Farah.
-
-T15 · Validate the Web Frontend end-to-end demonstration, accessible status messages and two-second search budget. Brayden Molinyawe.
+- **T14** · Validate Database (PostgreSQL) backup restoration and deletion replay on an isolated deployment. Christopher Farah.
+- **T15** · Validate the Web Frontend end-to-end demonstration, accessible status messages and two-second search budget. Brayden Molinyawe.
 
 ## 6. Risk register
 
@@ -212,5 +202,9 @@ Discussion draft: these triggers and responses are grounded in D1/D2 and the sch
 
 ¹ High is a proposed schedule consequence, not an owner assessment of probability. Record the team’s likelihood and impact ratings before submission.
 
-This week · Thu Nov 12: Chris records Cadence setup and a health check; Eric identifies a source and fixture; Brayden sketches the accessible target/results flow. Fri Nov 13: agree I5 request/response and exchange artifacts. By Sun Nov 15: each member posts progress, blockers, task estimates, availability and ownership changes for the weekly check-in. Next week: use the artifacts to verify M1.
+### Week of November 12
 
+- **Thu Nov 12** — Chris records Cadence setup and a health check; Eric identifies a source and fixture; Brayden sketches the accessible target/results flow.
+- **Fri Nov 13** — agree I5 request/response and exchange artifacts.
+- **By Sun Nov 15** — each member posts progress, blockers, task estimates, availability and ownership changes for the weekly check-in.
+- **Next week** — use the artifacts to verify M1.
